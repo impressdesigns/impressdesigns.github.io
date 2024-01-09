@@ -1,0 +1,36 @@
+---
+title: Welcome!
+description: Get started integrating with Impress Designs.
+template: splash
+hero:
+  tagline: Get started integrating with Impress Designs
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: See the docs
+      link: /guides/product-data/
+      icon: right-arrow
+      variant: primary
+    - text: See the API docs
+      link: https://idinet-backend.azurewebsites.net/docs
+      icon: external	
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+# What do you need to do?
+
+<CardGrid stagger>
+	<Card title="Guides" icon="list-format">
+		See our [guides](/guides/product-data/).
+	</Card>
+	<Card title="References" icon="add-document">
+		See our [references](/reference/product-data/).
+	</Card>
+	<Card title="Support" icon="external">
+		Our [support portal](https://impress.zendesk.com/).
+	</Card>
+	<Card title="Get connected to the API" icon="rocket">
+		Learn more in [the API Docs](https://idinet-backend.azurewebsites.net/docs).
+	</Card>
+</CardGrid>
