@@ -7,6 +7,10 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Impress Designs',
+			logo: {
+				src: './src/assets/impress-designs.svg',
+				replacesTitle: true,
+			},
 			social: {
 				github: 'https://github.com/impressdesigns/',
 			},
