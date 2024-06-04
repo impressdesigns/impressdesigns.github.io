@@ -1,11 +1,8 @@
 ---
-title: Product Data
-description: A reference for product data.
+title: Product data
 ---
 
-# Sending us your products data
-
-| Syntax      | Description                       | Required?                |
+| Field       | Description                       | Required?                |
 | ----------- | --------------------------------- | ------------------------ |
 | Vendor ID   | Your SKU                          | Yes                      |
 | GTIN        | Your UPC                          | No, but highly preferred |
