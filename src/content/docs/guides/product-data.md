@@ -2,6 +2,10 @@
 title: Product data
 ---
 
+## Requested fields
+
+These are the fields that we need to be able to import your products into our systems.
+
 | Field       | Description                       | Required?                |
 | ----------- | --------------------------------- | ------------------------ |
 | Vendor ID   | Your SKU                          | Yes                      |
