@@ -10,9 +10,24 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
-		<h1 class="text-3xl font-bold underline">Hello world!</h1>
-		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+	<body class="p-10">
+		<div class="flex flex-row min-h-screen justify-center items-center">
+			<div>
+				<a href="https://support.impressdesigns.com">Get support</a><br>
+				<a href="https://impressdesigns.github.io/integration-docs">See integration docs</a><br>
+				<a href="https://core.impressdesigns.com">Get connected to our API</a><br>
+			</div>
+			<div class="flex-auto">
+				<img
+					src="https://idiwebassets.blob.core.windows.net/$web/full-logo-blue.svg"
+					alt="Company logo."
+					height="2"
+				/>
+			</div>
+		</div>
+		<script
+			is:inline
+			src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"
+		></script>
 	</body>
 </html>
