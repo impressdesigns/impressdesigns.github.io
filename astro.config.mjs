@@ -11,9 +11,9 @@ export default defineConfig({
 				src: './src/assets/impress-designs.svg',
 				replacesTitle: true,
 			},
-			social: {
-				github: 'https://github.com/impressdesigns/',
-			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/impressdesigns/' },
+			],
 			sidebar: [
 				{
 					label: 'Guides',
