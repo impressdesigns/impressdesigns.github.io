@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome">
+	<section class="hero">
+		<img
+			class="hero-logo"
+			src="https://impressdesigns.dev/static-assets/logos/logo-primary.png"
+			alt="Impress Designs primary logo"
+			width="320"
+		/>
+		<h1>Impress Designs developer docs</h1>
+		<p>Get started integrating with Impress Designs.</p>
+	</section>
+
+	<section class="links">
+		<article>
+			<h2>Product data</h2>
+			<p>The fields we need to import your products into our systems.</p>
+			<a href="/guides/product-data/">Read the guide &rarr;</a>
+		</article>
+		<article>
+			<h2>Branding</h2>
+			<p>Our primary logo and brand color palette.</p>
+			<a href="/branding/">View branding &rarr;</a>
+		</article>
+		<article>
+			<h2>Get support</h2>
+			<p>Reach our support team for help with your account.</p>
+			<a href="https://support.impressdesigns.com/" rel="noopener">Visit support &rarr;</a>
+		</article>
+		<article>
+			<h2>API access</h2>
+			<p>Connect to our API and explore the schema.</p>
+			<a href="https://core.impressdesigns.com/schema" rel="noopener">View schema &rarr;</a>
+		</article>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 2rem 0 1rem;
+	}
+
+	.hero-logo {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.links {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 1.25rem;
+		margin-top: 2rem;
+	}
+
+	.links article {
+		border: 1px solid #e5e7eb;
+		border-radius: 0.5rem;
+		padding: 1.25rem;
+	}
+
+	.links article h2 {
+		margin-top: 0;
+	}
+</style>

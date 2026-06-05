@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const colors = [
+	{ name: 'Black', hex: '#000000', rgb: '0, 0, 0', cmyk: '75, 68, 67, 90' },
+	{ name: 'Pantone 7687', hex: '#264583', rgb: '38, 69, 131', cmyk: '97, 84, 19, 5' },
+	{ name: 'Cool Gray 8c', hex: '#888B8D', rgb: '136, 139, 141', cmyk: '49, 39, 39, 4' },
+	{ name: 'White', hex: '#FFFFFF', rgb: '255, 255, 255', cmyk: '0, 0, 0, 0' },
+];
+---
+
+<Layout title="Branding" description="The Impress Designs primary logo and brand color palette.">
+	<h1>Branding</h1>
+
+	<section class="logo-preview">
+		<h2>Primary logo</h2>
+		<div class="logo-frame">
+			<img
+				src="https://impressdesigns.dev/static-assets/logos/logo-primary.png"
+				alt="Impress Designs primary logo"
+				width="360"
+			/>
+		</div>
+	</section>
+
+	<section>
+		<h2>Color palette</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Swatch</th>
+					<th>Color name</th>
+					<th>HEX</th>
+					<th>RGB</th>
+					<th>CMYK</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					colors.map((color) => (
+						<tr>
+							<td>
+								<span
+									class="swatch"
+									style={`background:${color.hex}`}
+									title={color.hex}
+								/>
+							</td>
+							<td>{color.name}</td>
+							<td><code>{color.hex}</code></td>
+							<td>{color.rgb}</td>
+							<td>{color.cmyk}</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</section>
+</Layout>
+
+<style>
+	.logo-frame {
+		display: flex;
+		justify-content: center;
+		padding: 2.5rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 0.5rem;
+		background: #f5f6f8;
+	}
+
+	.logo-frame img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.swatch {
+		display: inline-block;
+		width: 2.5rem;
+		height: 1.5rem;
+		border-radius: 0.25rem;
+		border: 1px solid #d1d5db;
+		vertical-align: middle;
+	}
+
+	code {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	}
+</style>

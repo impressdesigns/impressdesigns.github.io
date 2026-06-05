@@ -1,6 +1,10 @@
 ---
+layout: ../../layouts/Layout.astro
 title: Product data
+description: The fields we need to import your products into our systems.
 ---
+
+# Product data
 
 ## Requested fields
 
