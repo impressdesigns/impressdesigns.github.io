@@ -1,0 +1,164 @@
+---
+export interface Props {
+	title?: string;
+	description?: string;
+	frontmatter?: { title?: string; description?: string };
+}
+
+const { frontmatter } = Astro.props;
+const title = Astro.props.title ?? frontmatter?.title;
+const description =
+	Astro.props.description ?? frontmatter?.description ?? 'Public documentation for Impress Designs.';
+const siteTitle = 'Impress Designs';
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+
+const nav = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Product data', href: '/guides/product-data/' },
+	{ label: 'Branding', href: '/branding/' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/assets/icons/icon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+		<link rel="apple-touch-icon" href="/assets/icons/icon-180.png" />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<a class="brand" href="/">
+				<img src="/assets/logos/logo-full.svg" alt="Impress Designs" height="36" />
+			</a>
+			<nav>
+				{
+					nav.map((item) => (
+						<a
+							href={item.href}
+							class={currentPath === item.href ? 'active' : ''}
+						>
+							{item.label}
+						</a>
+					))
+				}
+				<a href="https://github.com/impressdesigns/" rel="noopener">GitHub</a>
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<p>&copy; {new Date().getFullYear()} Impress Designs</p>
+		</footer>
+		<style is:global>
+			:root {
+				--id-blue: #264583;
+				--id-gray: #888b8d;
+				--id-black: #000000;
+				--id-white: #ffffff;
+				--max-width: 60rem;
+				font-family:
+					system-ui,
+					-apple-system,
+					'Segoe UI',
+					Roboto,
+					Helvetica,
+					Arial,
+					sans-serif;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				color: var(--id-black);
+				background: var(--id-white);
+				line-height: 1.6;
+			}
+
+			a {
+				color: var(--id-blue);
+			}
+
+			main {
+				max-width: var(--max-width);
+				margin: 0 auto;
+				padding: 2.5rem 1.25rem 4rem;
+			}
+
+			.site-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				max-width: var(--max-width);
+				margin: 0 auto;
+				padding: 1rem 1.25rem;
+				border-bottom: 1px solid #e5e7eb;
+			}
+
+			.brand {
+				display: inline-flex;
+				align-items: center;
+			}
+
+			.site-header nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1.25rem;
+			}
+
+			.site-header nav a {
+				text-decoration: none;
+				color: var(--id-gray);
+				font-weight: 500;
+			}
+
+			.site-header nav a:hover,
+			.site-header nav a.active {
+				color: var(--id-blue);
+			}
+
+			.site-footer {
+				max-width: var(--max-width);
+				margin: 0 auto;
+				padding: 1.5rem 1.25rem;
+				border-top: 1px solid #e5e7eb;
+				color: var(--id-gray);
+				font-size: 0.9rem;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 1.5rem 0;
+			}
+
+			th,
+			td {
+				border: 1px solid #e5e7eb;
+				padding: 0.5rem 0.75rem;
+				text-align: left;
+			}
+
+			th {
+				background: #f5f6f8;
+			}
+
+			h1,
+			h2 {
+				color: var(--id-blue);
+			}
+		</style>
+	</body>
+</html>

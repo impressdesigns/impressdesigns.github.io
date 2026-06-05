@@ -1,25 +1,6 @@
 import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://impressdesigns.dev',
-	integrations: [
-		starlight({
-			title: 'Impress Designs',
-			logo: {
-				src: './src/assets/impress-designs.svg',
-				replacesTitle: true,
-			},
-			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/impressdesigns/' },
-			],
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [{ autogenerate: { directory: 'guides' } }],
-				},
-			],
-		}),
-	],
 });
