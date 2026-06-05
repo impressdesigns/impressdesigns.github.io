@@ -1,29 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const links = [
+	{
+		title: 'Product data',
+		description: 'The fields we need to import your products into our systems.',
+		href: '/guides/product-data/',
+		cta: 'Read the guide',
+	},
+	{
+		title: 'Branding',
+		description: 'Our primary logo and brand color palette.',
+		href: '/branding/',
+		cta: 'View branding',
+	},
+	{
+		title: 'Get support',
+		description: 'Reach our support team for help with your account.',
+		href: 'https://support.impressdesigns.com/',
+		cta: 'Visit support',
+		external: true,
+	},
+	{
+		title: 'API access',
+		description: 'Connect to our API and explore the schema.',
+		href: 'https://core.impressdesigns.com/schema',
+		cta: 'View schema',
+		external: true,
+	},
+];
 ---
 
 <Layout title="Welcome">
 	<section class="links">
-		<article>
-			<h2>Product data</h2>
-			<p>The fields we need to import your products into our systems.</p>
-			<a href="/guides/product-data/">Read the guide &rarr;</a>
-		</article>
-		<article>
-			<h2>Branding</h2>
-			<p>Our primary logo and brand color palette.</p>
-			<a href="/branding/">View branding &rarr;</a>
-		</article>
-		<article>
-			<h2>Get support</h2>
-			<p>Reach our support team for help with your account.</p>
-			<a href="https://support.impressdesigns.com/" rel="noopener">Visit support &rarr;</a>
-		</article>
-		<article>
-			<h2>API access</h2>
-			<p>Connect to our API and explore the schema.</p>
-			<a href="https://core.impressdesigns.com/schema" rel="noopener">View schema &rarr;</a>
-		</article>
+		{
+			links.map((link) => (
+				<a
+					class="card"
+					href={link.href}
+					rel={link.external ? 'noopener' : undefined}
+				>
+					<h2>{link.title}</h2>
+					<p>{link.description}</p>
+					<span class="cta">
+						{link.cta}
+						<span class="arrow" aria-hidden="true">&rarr;</span>
+					</span>
+				</a>
+			))
+		}
 	</section>
 </Layout>
 
@@ -31,16 +56,82 @@ import Layout from '../layouts/Layout.astro';
 	.links {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-		gap: 1.25rem;
+		gap: 1.5rem;
 	}
 
-	.links article {
-		border: 1px solid #e5e7eb;
-		border-radius: 0.5rem;
-		padding: 1.25rem;
+	.card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 1.5rem;
+		border-radius: 0.75rem;
+		background: var(--id-white);
+		text-decoration: none;
+		color: var(--id-black);
+		overflow: hidden;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+		transition:
+			transform 0.18s ease,
+			box-shadow 0.18s ease;
 	}
 
-	.links article h2 {
-		margin-top: 0;
+	/* Brand accent bar that grows on hover */
+	.card::before {
+		content: '';
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 0.25rem;
+		background: var(--id-blue);
+		transform: scaleY(0);
+		transform-origin: top;
+		transition: transform 0.18s ease;
+	}
+
+	.card:hover,
+	.card:focus-visible {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 28px rgba(38, 69, 131, 0.16);
+		outline: none;
+	}
+
+	.card:hover::before,
+	.card:focus-visible::before {
+		transform: scaleY(1);
+	}
+
+	.card h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.2rem;
+	}
+
+	.card p {
+		margin: 0 0 1.25rem;
+		color: var(--id-gray);
+		flex: 1;
+	}
+
+	.cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-weight: 600;
+		color: var(--id-blue);
+	}
+
+	.arrow {
+		transition: transform 0.18s ease;
+	}
+
+	.card:hover .arrow,
+	.card:focus-visible .arrow {
+		transform: translateX(0.25rem);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.card,
+		.card::before,
+		.arrow {
+			transition: none;
+		}
 	}
 </style>
