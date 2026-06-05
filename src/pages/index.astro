@@ -3,17 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Welcome">
-	<section class="hero">
-		<img
-			class="hero-logo"
-			src="https://impressdesigns.dev/static-assets/logos/logo-primary.png"
-			alt="Impress Designs primary logo"
-			width="320"
-		/>
-		<h1>Impress Designs developer docs</h1>
-		<p>Get started integrating with Impress Designs.</p>
-	</section>
-
 	<section class="links">
 		<article>
 			<h2>Product data</h2>
@@ -39,21 +28,10 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-	.hero {
-		text-align: center;
-		padding: 2rem 0 1rem;
-	}
-
-	.hero-logo {
-		max-width: 100%;
-		height: auto;
-	}
-
 	.links {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 		gap: 1.25rem;
-		margin-top: 2rem;
 	}
 
 	.links article {
