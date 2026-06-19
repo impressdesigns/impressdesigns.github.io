@@ -10,7 +10,11 @@ const colors = [
 ---
 
 <Layout title="Branding" description="The Impress Designs primary logo and brand color palette.">
-	<h1>Branding</h1>
+	<header class="page-head">
+		<p class="eyebrow">Brand assets</p>
+		<h1>Branding</h1>
+		<p class="lead">Our primary logo and brand color palette.</p>
+	</header>
 
 	<section class="logo-preview">
 		<h2>Primary logo</h2>
@@ -25,64 +29,119 @@ const colors = [
 
 	<section>
 		<h2>Color palette</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Swatch</th>
-					<th>Color name</th>
-					<th>HEX</th>
-					<th>RGB</th>
-					<th>CMYK</th>
-				</tr>
-			</thead>
-			<tbody>
-				{
-					colors.map((color) => (
-						<tr>
-							<td>
-								<span
-									class="swatch"
-									style={`background:${color.hex}`}
-									title={color.hex}
-								/>
-							</td>
-							<td>{color.name}</td>
-							<td><code>{color.hex}</code></td>
-							<td>{color.rgb}</td>
-							<td>{color.cmyk}</td>
-						</tr>
-					))
-				}
-			</tbody>
-		</table>
+		<div class="swatches">
+			{
+				colors.map((color) => (
+					<article class="swatch-card">
+						<div class="swatch-chip" style={`background:${color.hex}`} />
+						<div class="swatch-body">
+							<h3 class="swatch-name">{color.name}</h3>
+							<dl class="swatch-values">
+								<div>
+									<dt>HEX</dt>
+									<dd>
+										<code>{color.hex}</code>
+									</dd>
+								</div>
+								<div>
+									<dt>RGB</dt>
+									<dd>{color.rgb}</dd>
+								</div>
+								<div>
+									<dt>CMYK</dt>
+									<dd>{color.cmyk}</dd>
+								</div>
+							</dl>
+						</div>
+					</article>
+				))
+			}
+		</div>
 	</section>
 </Layout>
 
 <style>
+	.page-head {
+		margin-bottom: 2.5rem;
+	}
+
+	.page-head h1 {
+		margin: 0 0 0.5rem;
+	}
+
+	.page-head .lead {
+		margin: 0;
+	}
+
 	.logo-frame {
 		display: flex;
 		justify-content: center;
-		padding: 2.5rem;
-		border: 1px solid #e5e7eb;
-		border-radius: 0.5rem;
-		background: #f5f6f8;
+		padding: 3rem;
+		border: 1px solid var(--id-border);
+		border-radius: var(--radius-lg);
+		background: var(--id-surface);
+		box-shadow: var(--shadow-sm);
 	}
 
-	.logo-frame img {
-		max-width: 100%;
-		height: auto;
+	.swatches {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+		gap: 1.25rem;
 	}
 
-	.swatch {
-		display: inline-block;
-		width: 2.5rem;
-		height: 1.5rem;
-		border-radius: 0.25rem;
-		border: 1px solid #d1d5db;
-		vertical-align: middle;
+	.swatch-card {
+		overflow: hidden;
+		border: 1px solid var(--id-border);
+		border-radius: var(--radius-lg);
+		background: var(--id-white);
+		box-shadow: var(--shadow-sm);
 	}
 
-	code {
-		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	.swatch-chip {
+		height: 6rem;
+		border-bottom: 1px solid var(--id-border);
+	}
+
+	.swatch-body {
+		padding: 1rem 1.1rem 1.2rem;
+	}
+
+	.swatch-name {
+		margin: 0 0 0.6rem;
+		font-size: 1.05rem;
+		color: var(--id-text);
+	}
+
+	.swatch-values {
+		display: grid;
+		gap: 0.35rem;
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.swatch-values > div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.swatch-values dt {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--id-gray);
+	}
+
+	.swatch-values dd {
+		margin: 0;
+		color: var(--id-muted);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.swatch-values code {
+		background: none;
+		padding: 0;
 	}
 </style>
