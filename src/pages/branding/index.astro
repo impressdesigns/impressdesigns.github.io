@@ -18,41 +18,12 @@ const colors = [
 
 	<section class="logo-preview">
 		<h2>Primary logo</h2>
-		<p class="section-note">
-			Use the full-colour lockup by default. The white lockup is for dark
-			surfaces; the black lockup is for single-colour and print.
-		</p>
-		<div class="logo-variants">
-			<figure class="logo-variant">
-				<div class="logo-frame">
-					<img
-						src="https://cdn.impressdesigns.com/logos/logo-full-color.png"
-						alt="Impress Designs logo, full colour"
-						width="320"
-					/>
-				</div>
-				<figcaption>Full colour</figcaption>
-			</figure>
-			<figure class="logo-variant">
-				<div class="logo-frame logo-frame--dark">
-					<img
-						src="https://cdn.impressdesigns.com/logos/logo-full-white.png"
-						alt="Impress Designs logo, white"
-						width="320"
-					/>
-				</div>
-				<figcaption>White &mdash; for dark surfaces</figcaption>
-			</figure>
-			<figure class="logo-variant">
-				<div class="logo-frame">
-					<img
-						src="https://cdn.impressdesigns.com/logos/logo-full-black.png"
-						alt="Impress Designs logo, black"
-						width="320"
-					/>
-				</div>
-				<figcaption>Black</figcaption>
-			</figure>
+		<div class="logo-frame">
+			<img
+				src="https://cdn.impressdesigns.com/logos/logo-full-color.png"
+				alt="Impress Designs primary logo"
+				width="360"
+			/>
 		</div>
 	</section>
 
@@ -110,47 +81,6 @@ const colors = [
 		border-radius: var(--radius-lg);
 		background: var(--id-surface);
 		box-shadow: var(--shadow-sm);
-	}
-
-	.section-note {
-		margin: 0 0 1.5rem;
-		max-width: 48rem;
-		color: var(--id-muted);
-	}
-
-	.logo-variants {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-		gap: 1.25rem;
-	}
-
-	.logo-variant {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		margin: 0;
-	}
-
-	.logo-variant .logo-frame {
-		padding: 2.5rem 2rem;
-	}
-
-	.logo-variant img {
-		width: 100%;
-		max-width: 320px;
-		height: auto;
-	}
-
-	.logo-frame--dark {
-		background: var(--id-text);
-		border-color: var(--id-text);
-	}
-
-	.logo-variant figcaption {
-		text-align: center;
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: var(--id-muted);
 	}
 
 	.swatches {
