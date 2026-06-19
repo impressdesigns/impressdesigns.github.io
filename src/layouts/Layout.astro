@@ -1,4 +1,7 @@
 ---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+
 export interface Props {
 	title?: string;
 	description?: string;
@@ -12,10 +15,11 @@ const description =
 const siteTitle = 'Impress Designs';
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 
-const nav = [
+const nav: { label: string; href: string; external?: boolean }[] = [
 	{ label: 'Home', href: '/' },
 	{ label: 'Product data', href: '/guides/product-data/' },
 	{ label: 'Branding', href: '/branding/' },
+	{ label: 'GitHub', href: 'https://github.com/impressdesigns/', external: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -34,68 +38,56 @@ const currentPath = Astro.url.pathname;
 	</head>
 	<body>
 		<header class="site-header">
-			<a class="brand" href="/">
-				<img src="https://impressdesigns.dev/static-assets/logos/logo-full.svg" alt="Impress Designs" height="36" />
-			</a>
-			<nav>
-				{
-					nav.map((item) => (
-						<a
-							href={item.href}
-							class={currentPath === item.href ? 'active' : ''}
-						>
-							{item.label}
-						</a>
-					))
-				}
-				<a href="https://github.com/impressdesigns/" rel="noopener">GitHub</a>
-			</nav>
+			<div class="site-header__inner">
+				<a class="brand" href="/">
+					<img src="https://impressdesigns.dev/static-assets/logos/logo-full.svg" alt="Impress Designs" height="36" />
+				</a>
+				<nav class="site-nav" aria-label="Primary">
+					{
+						nav.map((item) => (
+							<a
+								href={item.href}
+								class:list={[{ active: currentPath === item.href }]}
+								target={item.external ? '_blank' : undefined}
+								rel={item.external ? 'noopener noreferrer' : undefined}
+							>
+								{item.label}
+								{item.external && <Icon name="arrow-up-right" size={14} class="nav-ext" />}
+								{item.external && <span class="visually-hidden"> (opens in new tab)</span>}
+							</a>
+						))
+					}
+				</nav>
+			</div>
 		</header>
 		<main>
 			<slot />
 		</main>
 		<footer class="site-footer">
-			<p>&copy; {new Date().getFullYear()} Impress Designs</p>
+			<div class="site-footer__inner">
+				<p class="site-footer__copy">&copy; {new Date().getFullYear()} Impress Designs</p>
+				<nav class="site-footer__links" aria-label="Footer">
+					<a href="https://support.impressdesigns.com/" target="_blank" rel="noopener noreferrer">
+						Support<Icon name="arrow-up-right" size={13} class="nav-ext" /><span class="visually-hidden"> (opens in new tab)</span>
+					</a>
+					<a href="https://github.com/impressdesigns/" target="_blank" rel="noopener noreferrer">
+						GitHub<Icon name="arrow-up-right" size={13} class="nav-ext" /><span class="visually-hidden"> (opens in new tab)</span>
+					</a>
+				</nav>
+			</div>
 		</footer>
-		<style is:global>
-			:root {
-				--id-blue: #264583;
-				--id-gray: #888b8d;
-				--id-black: #000000;
-				--id-white: #ffffff;
-				--max-width: 60rem;
-				font-family:
-					system-ui,
-					-apple-system,
-					'Segoe UI',
-					Roboto,
-					Helvetica,
-					Arial,
-					sans-serif;
-			}
-
-			* {
-				box-sizing: border-box;
-			}
-
-			body {
-				margin: 0;
-				color: var(--id-black);
-				background: var(--id-white);
-				line-height: 1.6;
-			}
-
-			a {
-				color: var(--id-blue);
-			}
-
-			main {
-				max-width: var(--max-width);
-				margin: 0 auto;
-				padding: 2.5rem 1.25rem 4rem;
-			}
-
+		<style>
 			.site-header {
+				position: sticky;
+				top: 0;
+				z-index: 20;
+				background: rgba(255, 255, 255, 0.8);
+				backdrop-filter: saturate(180%) blur(10px);
+				-webkit-backdrop-filter: saturate(180%) blur(10px);
+				border-bottom: 1px solid var(--id-border);
+			}
+
+			.site-header__inner {
 				display: flex;
 				flex-wrap: wrap;
 				align-items: center;
@@ -103,8 +95,7 @@ const currentPath = Astro.url.pathname;
 				gap: 1rem;
 				max-width: var(--max-width);
 				margin: 0 auto;
-				padding: 1rem 1.25rem;
-				border-bottom: 1px solid #e5e7eb;
+				padding: 0.85rem 1.25rem;
 			}
 
 			.brand {
@@ -112,52 +103,98 @@ const currentPath = Astro.url.pathname;
 				align-items: center;
 			}
 
-			.site-header nav {
+			.brand img {
+				display: block;
+			}
+
+			.site-nav {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			.site-nav a {
+				position: relative;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.2rem;
+				text-decoration: none;
+				color: var(--id-muted);
+				font-weight: 500;
+				font-size: 0.95rem;
+				padding: 0.25rem 0;
+				transition: color 0.15s ease;
+			}
+
+			.site-nav a::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: -0.15rem;
+				height: 2px;
+				border-radius: 2px;
+				background: var(--id-blue);
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.18s ease;
+			}
+
+			.site-nav a:hover,
+			.site-nav a.active {
+				color: var(--id-blue);
+			}
+
+			.site-nav a:hover::after,
+			.site-nav a.active::after {
+				transform: scaleX(1);
+			}
+
+			.site-footer {
+				border-top: 1px solid var(--id-border);
+			}
+
+			.site-footer__inner {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 0.75rem 1.5rem;
+				max-width: var(--max-width);
+				margin: 0 auto;
+				padding: 1.5rem 1.25rem;
+				color: var(--id-gray);
+				font-size: 0.9rem;
+			}
+
+			.site-footer__copy {
+				margin: 0;
+			}
+
+			.site-footer__links {
 				display: flex;
 				flex-wrap: wrap;
 				gap: 1.25rem;
 			}
 
-			.site-header nav a {
+			.site-footer__links a {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.2rem;
+				color: var(--id-muted);
 				text-decoration: none;
-				color: var(--id-gray);
-				font-weight: 500;
 			}
 
-			.site-header nav a:hover,
-			.site-header nav a.active {
+			.site-footer__links a:hover {
 				color: var(--id-blue);
 			}
 
-			.site-footer {
-				max-width: var(--max-width);
-				margin: 0 auto;
-				padding: 1.5rem 1.25rem;
-				border-top: 1px solid #e5e7eb;
-				color: var(--id-gray);
-				font-size: 0.9rem;
-			}
-
-			table {
-				width: 100%;
-				border-collapse: collapse;
-				margin: 1.5rem 0;
-			}
-
-			th,
-			td {
-				border: 1px solid #e5e7eb;
-				padding: 0.5rem 0.75rem;
-				text-align: left;
-			}
-
-			th {
-				background: #f5f6f8;
-			}
-
-			h1,
-			h2 {
-				color: var(--id-blue);
+			@media (prefers-reduced-motion: reduce) {
+				.site-nav a,
+				.site-nav a::after {
+					transition: none;
+				}
 			}
 		</style>
 	</body>
